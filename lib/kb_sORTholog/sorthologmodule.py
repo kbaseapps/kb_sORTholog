@@ -7,16 +7,15 @@ import logging
 import json
 import pandas as pd
 from Bio import SeqIO
-from .basemodule import BaseModule
-
-warnings.filterwarnings("ignore")
+from kbbasemodules.basemodule import BaseModule
 
 logger = logging.getLogger(__name__)
 
 class sORThologModule(BaseModule):
-    def __init__(self,name,working_dir,module_dir,config):
-        BaseModule.__init__(self,name,None,working_dir,config)
+    def __init__(self,name,wsclient,anno_api,working_dir,module_dir,config):
+        BaseModule.__init__(self,name,wsclient,working_dir,config)
         self.module_dir = module_dir
+        self.anno_api = anno_api
         logging.basicConfig(format='%(created)s %(levelname)s: %(message)s',
                             level=logging.INFO)
     
@@ -24,11 +23,6 @@ class sORThologModule(BaseModule):
         #Initializes and preserves provenance information essential for functions that save objects to KBase
         self.initialize_call("run_sORTholog",params,True)
         #Function ensures required arguments are provided and optional arguments have default values
-        params = self.validate_args(params,[],{
-            "p_threshold":0.5,     # If the probability of an EC number is greater than or equal this threshold return the EC number.
-            "proteins":None,
-            "fasta_file":None,
-            "file_output":True
-        })
-        output = {"annotation":{}}
+        params = self.validate_args(params,["genome_refs"],{})
+        output = {"data":{}}
         return output 

@@ -1,32 +1,36 @@
 {
     "ver": "0.0.1",
     "authors": [
-        "chenry"
+        "chenry","ghutinet"
     ],
     "contact": "",
     "categories": ["active"],
     "widgets": {
-        "input": null,
-        "output": null
+        "output": "no-display",
+        "input": null
     },
     "parameters": [ 
         {
-            "id": "parameter_1",
-            "optional": true,
-            "advanced": false,
-            "allow_multiple": false,
-            "default_values": [ "" ],
+            "id": "genome_refs",
             "field_type": "text",
+            "default_values": [
+                ""
+            ],
             "text_options": {
-                "valid_ws_types": [ ]
-            }
+                "valid_ws_types": [
+                    "KBaseGenomes.Genome","KBaseSearch.GenomeSet"
+                ]
+            },
+            "allow_multiple": true,
+            "optional": false,
+            "advanced": false
         }
     ],
     "behavior": {
         "service-mapping": {
             "url": "",
             "name": "kb_sORTholog",
-            "method": "run_kb_sORTholog",
+            "method": "run_sORTholog",
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",
@@ -35,8 +39,9 @@
                     "narrative_system_variable": "workspace_id",
                     "target_property": "workspace_id"
                 },{
-                    "input_parameter": "parameter_1",
-                    "target_property": "parameter_1"
+                    "target_property": "genome_refs",
+                    "input_parameter": "genome_refs",
+                    "target_type_transform": "resolved-ref"
                 }
             ],
             "output_mapping": [

@@ -54,7 +54,7 @@ class kb_sORTholog:
         self.kbreport = KBaseReport(self.callback_url,token=self.token)
         self.anno_api = cb_annotation_ontology_api(self.callback_url,token=self.token)
         self.dfu = DataFileUtil(self.callback_url,token=self.token)
-        self.api = sORThologModule("kb_sORTholog",self.wsclient,self.anno_api,config['scratch'],self.config)
+        self.api = sORThologModule("kb_sORTholog",self.wsclient,self.anno_api,config['scratch'],"/kb/module",self.config)
         logging.basicConfig(format='%(created)s %(levelname)s: %(message)s',
                             level=logging.INFO)
         #END_CONSTRUCTOR
@@ -75,8 +75,8 @@ class kb_sORTholog:
         # ctx is the context object
         # return variables are: output
         #BEGIN run_sORTholog
-        api_output = self.api.PDBAnnotation(params)            
-        output = self.save_report_to_kbase(api_output,)
+        api_output = self.api.run_sORTholog(input)            
+        output = self.save_report_to_kbase(api_output)
         self.api.transfer_outputs(output,api_output,["data"])
         #END run_sORTholog
 

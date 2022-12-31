@@ -10,7 +10,9 @@ module kb_sORTholog {
     typedef string genome_ref;
     
     typedef structure {
-        list<genome_ref> genomes;
+    	int workspace_id;
+    	string workspace_name;
+        list<genome_ref> genome_refs;
     } RunSORThologParams;
     
     typedef structure {

@@ -1,0 +1,36 @@
+#
+# define display information
+#
+name: Find Orthologs with sORTholog
+
+tooltip: |
+    Find Orthologs with sORTholog
+
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar apps that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    genome_refs :
+        ui-name : |
+            Genome or Genome Set
+        short-hint : |
+            Genomes or genome sets in which to search for orthologs
+        placeholder : |
+            Targets for ortholog search
+
+description : |
+    <p>TODO</p>

@@ -8,6 +8,26 @@ MAINTAINER KBase Developer
 
 # RUN apt-get update
 
+RUN pip install --upgrade pip \
+    && pip install biopython --upgrade \
+    && pip install --upgrade requests \
+    && pip install pandas \
+    && pip install mock==4.0.3
+
+# update security libraries in the base image
+RUN pip install cffi --upgrade \
+    && pip install pyopenssl --upgrade \
+    && pip install ndg-httpsclient --upgrade \
+    && pip install pyasn1 --upgrade \
+    && pip install requests --upgrade \
+    && pip install 'requests[security]' --upgrade \
+	&& pip install --upgrade pyopenssl ndg-httpsclient && \
+    pip install --upgrade pyasn1 requests 'requests[security]' && \
+    pip install coverage networkx cython && \
+    pip install --upgrade pip setuptools wheel cffi
+
+RUN mkdir deps && cd deps && \
+	git clone --branch main https://github.com/cshenry/KBBaseModules.git
 
 # -----------------------------------------
 
